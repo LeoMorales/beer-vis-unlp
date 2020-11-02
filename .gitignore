@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+beervisapp/node_modules
+beervisapp/.pnp
+beervisapp/.pnp.js
+
+# testing
+beervisapp/coverage
+
+# production
+beervisapp/build
+
+# misc
+beervisapp/.DS_Store
+beervisapp/.env.local
+beervisapp/.env.development.local
+beervisapp/.env.test.local
+beervisapp/.env.production.local
+
+beervisapp/npm-debug.log*
+beervisapp/yarn-debug.log*
+beervisapp/yarn-error.log*

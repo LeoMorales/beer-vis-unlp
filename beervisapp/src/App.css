@@ -1,0 +1,51 @@
+/* Begin GRID styles: */
+body {
+  padding: 2px;
+  text-align: center;
+  font: Helvetica Neue, Helvetica;
+  font-family: "monospace";
+}
+/* https://colorhunt.co/palette/212802 */
+/* https://brandpalettes.com/heineken-color-codes/ */
+
+.header {
+  grid-area: header;
+  background-color: #008200;
+  color: #c3c3c3;
+}
+
+.header h1 {
+  font-size: medium;
+}
+.pcc {
+  grid-area: pcc;
+  background-color: #f8f1f1;
+}
+.map {
+  grid-area: map;
+  background-color: #f8f1f1;
+}
+.selector {
+  grid-area: selector;
+  background-color: #f8f1f1;
+}
+.footer {
+  grid-area: footer;
+  background-color: #16697a;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 30px 1fr 2fr 30px;
+  grid-template-areas:
+    "header header"
+    "pcc pcc"
+    "map selector"
+    "footer footer";
+  height: 100vh;
+  justify-content: space-between;
+  gap: 5px;
+}
+/* End GRID styles: */
