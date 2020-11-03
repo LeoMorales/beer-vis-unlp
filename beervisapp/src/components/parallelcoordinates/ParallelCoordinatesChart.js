@@ -1,9 +1,21 @@
 import { useD3 } from "../hooks/useD3";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import "./ParallelCoordinatesChart.css";
 
-function ParallelCoordinatesChart({ recipes }) {
+function ParallelCoordinatesChart() {
+  let [recipes, setRecipes] = useState([]);
+  // let [isPaintedCompleted, setIsPaintedCompleted] = useState(false);
+
+  useEffect(() => {
+    d3.json(
+      "https://raw.githubusercontent.com/LeoMorales/beer-vis-unlp/master/beervisapp/src/data/recipeData.json",
+      (res) => {
+        setRecipes(res);
+      }
+    );
+  }, []);
+
   const makeParallel = (mainSvg) => {
     const margin = { top: 30, right: 30, bottom: 30, left: 30 };
     const width = 1060 - margin.left - margin.right;
@@ -153,11 +165,17 @@ function ParallelCoordinatesChart({ recipes }) {
       .selectAll("rect")
       .attr("x", -8)
       .attr("width", 16);
+
+    // setIsPaintedCompleted(true);
   };
 
   const ref = useD3(makeParallel, [recipes.length]);
 
-  return <svg ref={ref}></svg>;
+  return recipes.length === 0 ? (
+    <p> Recibiendo datos...</p>
+  ) : (
+    <svg ref={ref}></svg>
+  );
 }
 
 export default ParallelCoordinatesChart;

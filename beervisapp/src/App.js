@@ -1,7 +1,6 @@
 import "./App.css";
 import ParallelCoordinatesChart from "./components/parallelcoordinates/ParallelCoordinatesChart";
 import BeerMap from "./components/beermap/BeerMap";
-import { recipes } from "./data/recipes";
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
         <h1>BeerVIS</h1>
       </div>
       <div className='pcc'>
-        <ParallelCoordinatesChart recipes={recipes} />
+        <ParallelCoordinatesChart />
       </div>
       <div className='map'>
         <BeerMap />
