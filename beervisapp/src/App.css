@@ -10,28 +10,29 @@ body {
 
 .header {
   grid-area: header;
-  background-color: #008200;
-  color: #c3c3c3;
+  background-color: #4d4d4d;
+  color: #fff;
+  text-align: center;
 }
 
 .header h1 {
-  font-size: medium;
+  font-size: 1.5rem;
 }
 .pcc {
   grid-area: pcc;
-  background-color: #f8f1f1;
+  background-color: #fff;
 }
 .map {
   grid-area: map;
-  background-color: #f8f1f1;
+  background-color: #fff;
 }
 .selector {
   grid-area: selector;
-  background-color: #f8f1f1;
+  background-color: #fff;
 }
 .footer {
   grid-area: footer;
-  background-color: #16697a;
+  background-color: #4d4d4d;
   text-align: center;
 }
 
@@ -40,12 +41,17 @@ body {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 30px 1fr 2fr 30px;
   grid-template-areas:
-    "header header"
-    "pcc pcc"
-    "map selector"
-    "footer footer";
+    "header header header"
+    "pcc pcc pcc"
+    "map map selector"
+    "footer footer footer";
   height: 100vh;
   justify-content: space-between;
   gap: 5px;
 }
 /* End GRID styles: */
+
+.selector {
+  overflow: scroll;
+  padding: 15px;
+}

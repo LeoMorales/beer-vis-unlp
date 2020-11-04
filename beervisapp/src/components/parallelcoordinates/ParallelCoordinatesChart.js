@@ -3,7 +3,8 @@ import React from "react";
 import * as d3 from "d3";
 import "./ParallelCoordinatesChart.css";
 
-function ParallelCoordinatesChart({ recipes }) {
+function ParallelCoordinatesChart({ recipes, onRecipesChange }) {
+ 
   const makeParallel = (mainSvg) => {
     const margin = { top: 30, right: 30, bottom: 30, left: 30 };
     const width = 1060 - margin.left - margin.right;
@@ -43,18 +44,34 @@ function ParallelCoordinatesChart({ recipes }) {
     const brush = () => {
       var actives = dimensions.filter((p) => !y[p].brush.empty()),
         extents = actives.map((p) => y[p].brush.extent());
-      foreground.style("display", (d) => {
-        return actives.every(
-          (p, i) => extents[i][0] <= d[p] && d[p] <= extents[i][1]
-        )
-          ? null
-          : "none";
-      });
+        foreground.style("display", (d) => {
+          return actives.every(
+            (p, i) => extents[i][0] <= d[p] && d[p] <= extents[i][1]
+          )
+            ? null
+            : "none";
+        });
     };
+
+    const brushend = () => {
+      var actives = dimensions.filter((p) => !y[p].brush.empty()),
+        extents = actives.map((p) => y[p].brush.extent());
+      var selected = [];
+      recipes.map(function(d) {
+        return actives.every(function(p, dimension) {
+          return extents[dimension][0] <= d[p] && d[p] <= extents[dimension][1];
+        }) ? selected.push(d) : null;
+      });
+      onRecipesChange(selected);
+    };
+
+    var not_included_columns = [
+      "Name", "URL", "StyleID", "BeerID"
+    ];
     x.domain(
       (dimensions = d3.keys(recipes[0]).filter(
         (d) =>
-          d !== "UserId" &&
+          !not_included_columns.includes(d) &&
           (y[d] = d3.scale
             .linear()
             .domain(d3.extent(recipes, (p) => +p[d]))
@@ -147,7 +164,8 @@ function ParallelCoordinatesChart({ recipes }) {
             .brush()
             .y(y[d])
             .on("brushstart", brushstart)
-            .on("brush", brush))
+            .on("brush", brush)
+            .on("brushend", brushend))
         );
       })
       .selectAll("rect")
